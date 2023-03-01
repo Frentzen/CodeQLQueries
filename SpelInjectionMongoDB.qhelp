@@ -1,0 +1,31 @@
+<!DOCTYPE qhelp PUBLIC
+  "-//Semmle//qhelp//EN"
+  "qhelp.dtd">
+<qhelp>
+<overview>
+<p>Expression Language (EL) injection occurs when an attacker is able to inject 
+malicious EL code into a web application's input fields or parameters, allowing 
+them to execute arbitrary code on the server or access sensitive information.
+A Spring Data MongoDB application is vulnerable to SpEL Injection when using @Query 
+or @Aggregation-annotated query methods with SpEL expressions that contain query 
+parameter placeholders for value binding if the input is not sanitized.
+</p>
+</overview>
+
+<recommendation>
+<p>Rewrite query or aggregation declarations to use parameter 
+references (“[0]” instead of “?0“) within the expression. Sanitize parameters 
+before calling the query method and upgrade the affected component.</p>
+</recommendation>
+
+<example>
+<p>In the following example, the code accepts an expression language from the user in the @Query annotation and evaluates it.
+</p>
+
+<sample src="SpelInjectionMongoDB.java" />
+</example>
+
+<references>
+<li>Spring: <a href="https://spring.io/security/cve-2022-22980">SpEL Injection</a>.</li>
+</references>
+</qhelp>
